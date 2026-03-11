@@ -59,12 +59,13 @@ export async function POST(req: NextRequest) {
 
   const { data: usageRow } = await supabase
     .from("daily_usage")
-    .select("id, ads_used")
+    .select("id, ads_used, keywords_used")
     .eq("user_id", user.id)
     .eq("usage_date", today)
     .maybeSingle();
 
   const adsUsed = usageRow?.ads_used ?? 0;
+  const keywordsUsed = usageRow?.keywords_used ?? 0;
 
   if (maxAds > 0 && adsUsed >= maxAds) {
     logger.warn({ userId: user.id, adsUsed, maxAds }, "Daily ads limit exceeded");
@@ -81,7 +82,7 @@ export async function POST(req: NextRequest) {
       usage_date: today,
       ads_used: adsUsed + 10,
       scans_used: usageRow ? undefined : 0,
-      keywords_used: usageRow ? undefined : 0,
+      keywords_used: keywordsUsed + 10,
     },
     { onConflict: "user_id,usage_date" },
   );

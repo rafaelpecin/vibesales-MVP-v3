@@ -7,11 +7,12 @@ import { AlertCircle, ArrowRight, Search } from "lucide-react";
 interface UrlInputFormProps {
   scansUsed: number;
   maxScans: number;
+  initialUrl?: string;
 }
 
-export function UrlInputForm({ scansUsed, maxScans }: UrlInputFormProps) {
+export function UrlInputForm({ scansUsed, maxScans, initialUrl = "" }: UrlInputFormProps) {
   const router = useRouter();
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(initialUrl);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

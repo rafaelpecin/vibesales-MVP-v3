@@ -21,6 +21,8 @@ interface AdResultEntry extends AdsData {
 interface UsageData {
   adsUsed: number;
   maxAds: number;
+  keywordsUsed: number;
+  maxKeywords: number;
 }
 
 interface AdGeneratorFormProps {
@@ -51,7 +53,7 @@ export function AdGeneratorForm({ initialUrl = "" }: AdGeneratorFormProps) {
       const res = await fetch("/api/user/usage");
       if (!res.ok) return;
       const data = await res.json();
-      setUsage({ adsUsed: data.adsUsed ?? 0, maxAds: data.maxAds ?? 0 });
+      setUsage({ adsUsed: data.adsUsed ?? 0, maxAds: data.maxAds ?? 0, keywordsUsed: data.keywordsUsed ?? 0, maxKeywords: data.maxKeywords ?? 0 });
     } catch {
       // Non-critical — usage counter is best-effort
     }
@@ -177,12 +179,20 @@ export function AdGeneratorForm({ initialUrl = "" }: AdGeneratorFormProps) {
 
         {/* Usage counter */}
         {usage !== null && (
-          <p className="text-sm text-gray-500">
-            Ads generated today:{" "}
-            <span className={`font-medium ${limitReached ? "text-red-500" : "text-gray-700"}`}>
-              {usage.adsUsed} / {usage.maxAds > 0 ? usage.maxAds : "∞"}
-            </span>
-          </p>
+          <div className="flex flex-wrap gap-x-5 gap-y-1">
+            <p className="text-sm text-gray-500">
+              Ads generated today:{" "}
+              <span className={`font-medium ${limitReached ? "text-red-500" : "text-gray-700"}`}>
+                {usage.adsUsed} / {usage.maxAds > 0 ? usage.maxAds : "∞"}
+              </span>
+            </p>
+            <p className="text-sm text-gray-500">
+              Keywords generated today:{" "}
+              <span className="font-medium text-gray-700">
+                {usage.keywordsUsed} / {usage.maxKeywords > 0 ? usage.maxKeywords : "∞"}
+              </span>
+            </p>
+          </div>
         )}
 
         {/* Error */}

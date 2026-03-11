@@ -2,7 +2,12 @@ import { redirect } from "next/navigation";
 import { createClient, ensureUserProfile } from "@/lib/supabase/server";
 import { UrlInputForm } from "@/components/seo/UrlInputForm";
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ url?: string }>;
+}) {
+  const { url: initialUrl } = await searchParams;
   const supabase = await createClient();
 
   const {
@@ -47,7 +52,7 @@ export default async function DashboardPage() {
         </p>
       </div>
 
-      <UrlInputForm scansUsed={scansUsed} maxScans={maxScans} />
+      <UrlInputForm scansUsed={scansUsed} maxScans={maxScans} initialUrl={initialUrl ?? ""} />
     </main>
   );
 }

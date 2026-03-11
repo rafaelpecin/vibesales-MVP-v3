@@ -20,7 +20,7 @@ export async function GET() {
 
   const { data: userRow, error: userErr } = await supabase
     .from("users")
-    .select("plan_id, plans(max_ads_per_day, max_scans_per_day)")
+    .select("plan_id, plans(max_ads_per_day, max_scans_per_day, max_keywords_per_day)")
     .eq("id", user.id)
     .single();
 
@@ -32,16 +32,18 @@ export async function GET() {
   const plans = userRow.plans as {
     max_ads_per_day: number;
     max_scans_per_day: number;
+    max_keywords_per_day: number;
   } | null;
 
   const maxAds = plans?.max_ads_per_day ?? 10;
   const maxScans = plans?.max_scans_per_day ?? 1;
+  const maxKeywords = plans?.max_keywords_per_day ?? 0;
 
   const today = new Date().toISOString().slice(0, 10);
 
   const { data: usageRow } = await supabase
     .from("daily_usage")
-    .select("ads_used, scans_used")
+    .select("ads_used, scans_used, keywords_used")
     .eq("user_id", user.id)
     .eq("usage_date", today)
     .maybeSingle();
@@ -51,5 +53,7 @@ export async function GET() {
     maxAds,
     scansUsed: usageRow?.scans_used ?? 0,
     maxScans,
+    keywordsUsed: usageRow?.keywords_used ?? 0,
+    maxKeywords,
   });
 }
