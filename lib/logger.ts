@@ -4,31 +4,19 @@ const isDev = process.env.NODE_ENV !== "production";
 
 /**
  * Root pino logger instance.
- * In development, uses pino-pretty for human-readable output.
- * In production, emits newline-delimited JSON for log aggregators (e.g. Vercel, Datadog).
+ * In development and production, emits newline-delimited JSON.
+ * pino.transport (worker threads) is not compatible with Next.js server components.
  */
-const rootLogger: PinoLogger = pino(
-  {
-    level: process.env.LOG_LEVEL ?? (isDev ? "debug" : "info"),
-    base: { env: process.env.NODE_ENV },
-    timestamp: pino.stdTimeFunctions.isoTime,
-    formatters: {
-      level(label) {
-        return { level: label };
-      },
+const rootLogger: PinoLogger = pino({
+  level: process.env.LOG_LEVEL ?? (isDev ? "debug" : "info"),
+  base: { env: process.env.NODE_ENV },
+  timestamp: pino.stdTimeFunctions.isoTime,
+  formatters: {
+    level(label) {
+      return { level: label };
     },
   },
-  isDev
-    ? pino.transport({
-        target: "pino-pretty",
-        options: {
-          colorize: true,
-          translateTime: "SYS:standard",
-          ignore: "pid,hostname",
-        },
-      })
-    : undefined,
-);
+});
 
 /**
  * Creates a child logger bound to a specific module/context.

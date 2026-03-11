@@ -10,7 +10,7 @@ import { Loader2 } from "lucide-react";
 
 import { createClient } from "@/lib/supabase/client";
 import { createLogger } from "@/lib/logger";
-import { env } from "@/lib/env";
+import { clientEnv as env } from "@/lib/env";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -70,22 +70,6 @@ export default function RegisterPage() {
     }
 
     if (data.user) {
-      // Insert profile row — upsert so it's idempotent if trigger already created it.
-      const { error: profileError } = await supabase.from("users").upsert(
-        {
-          id: data.user.id,
-          email: values.email,
-          full_name: values.fullName,
-          plan_id: "free",
-          role: "user",
-        },
-        { onConflict: "id", ignoreDuplicates: true },
-      );
-
-      if (profileError) {
-        logger.error({ userId: data.user.id, error: profileError.message }, "Failed to insert profile after register");
-      }
-
       logger.info({ userId: data.user.id, email: values.email }, "Registration successful");
     }
 

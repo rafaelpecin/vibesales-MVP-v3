@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient, createClient } from "@/lib/supabase/server";
 import { createLogger } from "@/lib/logger";
 import { env } from "@/lib/env";
 
@@ -34,20 +34,18 @@ export async function GET(request: NextRequest) {
   const { user } = data.session;
   logger.info({ userId: user.id, provider: user.app_metadata?.provider }, "OAuth session established");
 
-  // Upsert the user profile so first-time SSO logins get a row in public.users.
-  const { error: upsertError } = await supabase.from("users").upsert(
+  // Upsert the user profile so first-time logins get a row in public.users.
+  // Use the admin client to bypass RLS — the user session may not be propagated yet.
+  const adminClient = await createAdminClient();
+  const { error: upsertError } = await adminClient.from("users").upsert(
     {
       id: user.id,
       email: user.email,
       full_name: user.user_metadata?.full_name ?? user.user_metadata?.name ?? null,
-      avatar_url: user.user_metadata?.avatar_url ?? user.user_metadata?.picture ?? null,
-      plan_id: "free",
-      role: "user",
     },
     {
-      // Only update mutable fields; never overwrite plan_id or role if already set.
       onConflict: "id",
-      ignoreDuplicates: false,
+      ignoreDuplicates: true,
     },
   );
 

@@ -1,5 +1,5 @@
 import { createBrowserClient } from "@supabase/ssr";
-import { env } from "@/lib/env";
+import { clientEnv as env } from "@/lib/env";
 
 /**
  * Returns a Supabase client for use in Client Components and browser hooks.

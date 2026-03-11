@@ -11,7 +11,7 @@ export async function createClient() {
 
   return createServerClient(
     env.NEXT_PUBLIC_SUPABASE_URL,
-    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    env.SUPABASE_SERVICE_ROLE_KEY,
     {
       cookies: {
         getAll() {
@@ -29,6 +29,23 @@ export async function createClient() {
         },
       },
     },
+  );
+}
+
+/**
+ * Ensures a row exists in public.users for the given auth user.
+ * Uses the admin client to bypass RLS. Safe to call on every authenticated request —
+ * ignoreDuplicates means it's a no-op if the row already exists.
+ */
+export async function ensureUserProfile(user: { id: string; email?: string; user_metadata?: Record<string, unknown> }) {
+  const admin = await createAdminClient();
+  await admin.from("users").upsert(
+    {
+      id: user.id,
+      email: user.email,
+      full_name: (user.user_metadata?.full_name ?? user.user_metadata?.name ?? null) as string | null,
+    },
+    { onConflict: "id", ignoreDuplicates: true },
   );
 }
 

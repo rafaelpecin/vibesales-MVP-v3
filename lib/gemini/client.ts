@@ -2,6 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { env } from "@/lib/env";
 import { createLogger } from "@/lib/logger";
 import type { SeoResult } from "@/lib/gemini/seoPrompt";
+import type { AdsResult } from "@/lib/gemini/adsPrompt";
 
 const logger = createLogger("lib/gemini/client");
 
@@ -16,7 +17,7 @@ function getGenAI(): GoogleGenerativeAI {
 
 export async function callGeminiForSeo(prompt: string): Promise<SeoResult> {
   const genAI = getGenAI();
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   logger.info("Gemini call start");
   const start = Date.now();
@@ -46,8 +47,48 @@ export async function callGeminiForSeo(prompt: string): Promise<SeoResult> {
       "Gemini response parsed",
     );
   } catch (err) {
+    logger.console.error({ raw: cleaned}, "Gemini full response");
     logger.error({ err, raw: cleaned.slice(0, 500) }, "Failed to parse Gemini JSON response");
     throw new Error("Invalid JSON returned by Gemini");
+  }
+
+  return parsed;
+}
+
+export async function callGeminiForAds(prompt: string): Promise<AdsResult> {
+  const genAI = getGenAI();
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+  logger.info("Gemini ads call start");
+  const start = Date.now();
+
+  const result = await model.generateContent(prompt);
+  const text = result.response.text();
+
+  const duration = Date.now() - start;
+  logger.info({ duration_ms: duration }, "Gemini ads call complete");
+
+  const cleaned = text
+    .replace(/^```json\s*/i, "")
+    .replace(/^```\s*/i, "")
+    .replace(/```\s*$/i, "")
+    .trim();
+
+  let parsed: AdsResult;
+  try {
+    parsed = JSON.parse(cleaned) as AdsResult;
+  } catch (err) {
+    logger.error({ err, raw: cleaned.slice(0, 500) }, "Failed to parse Gemini ads JSON response");
+    throw new Error("Invalid JSON returned by Gemini");
+  }
+
+  if (
+    !Array.isArray(parsed) ||
+    parsed.length !== 4 ||
+    !parsed.every((arr) => Array.isArray(arr) && arr.length === 10)
+  ) {
+    logger.error({ shape: parsed }, "Gemini ads response does not match expected shape");
+    throw new Error("Gemini ads response shape invalid");
   }
 
   return parsed;

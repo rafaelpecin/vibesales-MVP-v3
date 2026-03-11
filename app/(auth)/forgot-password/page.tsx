@@ -9,7 +9,7 @@ import { Loader2, MailCheck } from "lucide-react";
 
 import { createClient } from "@/lib/supabase/client";
 import { createLogger } from "@/lib/logger";
-import { env } from "@/lib/env";
+import { clientEnv as env } from "@/lib/env";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";

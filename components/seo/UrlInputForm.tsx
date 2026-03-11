@@ -50,7 +50,7 @@ export function UrlInputForm({ scansUsed, maxScans }: UrlInputFormProps) {
 
   function handleSkipToAds() {
     if (!url.trim()) return;
-    router.push(`/dashboard/ads?url=${encodeURIComponent(url.trim())}`);
+    router.push(`/ads?url=${encodeURIComponent(url.trim())}`);
   }
 
   return (

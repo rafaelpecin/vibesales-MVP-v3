@@ -21,7 +21,7 @@ export function ScanResultView({ scanId, url, result }: ScanResultViewProps) {
       scan_id: scanId,
       keywords: result.keywords.join(","),
     });
-    router.push(`/dashboard/ads?${params.toString()}`);
+    router.push(`/ads?${params.toString()}`);
   }
 
   return (

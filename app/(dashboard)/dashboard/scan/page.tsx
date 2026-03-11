@@ -5,7 +5,7 @@ import { ScanResultView } from "@/components/seo/ScanResultView";
 import type { SeoResult } from "@/lib/gemini/seoPrompt";
 
 interface ScanPageProps {
-  searchParams: Promise<{ scanId?: string }>;
+  searchParams: Promise<{ id?: string }>;
 }
 
 async function ScanResult({ scanId }: { scanId: string }) {
@@ -62,7 +62,7 @@ function ScanSkeleton() {
 }
 
 export default async function ScanPage({ searchParams }: ScanPageProps) {
-  const { scanId } = await searchParams;
+  const { id: scanId } = await searchParams;
 
   if (!scanId) {
     redirect("/dashboard");

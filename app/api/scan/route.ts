@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, ensureUserProfile } from "@/lib/supabase/server";
 import { createLogger } from "@/lib/logger";
 import { buildSeoPrompt } from "@/lib/gemini/seoPrompt";
 import { callGeminiForSeo } from "@/lib/gemini/client";
@@ -35,6 +35,8 @@ export async function POST(req: NextRequest) {
 
   const { url } = body;
   logger.info({ userId: user.id, url }, "Scan start");
+
+  await ensureUserProfile(user);
 
   const { data: userRow, error: userErr } = await supabase
     .from("users")

@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, ensureUserProfile } from "@/lib/supabase/server";
 import { UrlInputForm } from "@/components/seo/UrlInputForm";
 
 export default async function DashboardPage() {
@@ -13,7 +13,28 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
+  await ensureUserProfile(user);
+
   const firstName = user.user_metadata?.full_name?.split(" ")[0] ?? user.email?.split("@")[0] ?? "there";
+
+  const { data: userRow } = await supabase
+    .from("users")
+    .select("plan_id, plans(max_scans_per_day)")
+    .eq("id", user.id)
+    .single();
+
+  const maxScans =
+    (userRow?.plans as { max_scans_per_day: number } | null)?.max_scans_per_day ?? 1;
+
+  const today = new Date().toISOString().slice(0, 10);
+  const { data: usageRow } = await supabase
+    .from("daily_usage")
+    .select("scans_used")
+    .eq("user_id", user.id)
+    .eq("usage_date", today)
+    .maybeSingle();
+
+  const scansUsed = usageRow?.scans_used ?? 0;
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-12">
@@ -26,7 +47,7 @@ export default async function DashboardPage() {
         </p>
       </div>
 
-      <UrlInputForm />
+      <UrlInputForm scansUsed={scansUsed} maxScans={maxScans} />
     </main>
   );
 }
