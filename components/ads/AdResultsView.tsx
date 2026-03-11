@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Download, Loader2 } from "lucide-react";
 import { exportGoogleAds } from "@/lib/csv/googleAdsExport";
 import { exportMetaAds } from "@/lib/csv/metaAdsExport";
@@ -30,6 +30,18 @@ export function AdResultsView({
   const [longTitles, setLongTitles] = useState<string[]>(initialLongTitles);
   const [descriptions, setDescriptions] = useState<string[]>(initialDescriptions);
   const [keywords, setKeywords] = useState<string[]>([...initialKeywords, ""]);
+  const prevKeywordsLengthRef = useRef(initialKeywords.length);
+
+  useEffect(() => {
+    if (initialKeywords.length > prevKeywordsLengthRef.current) {
+      const newOnes = initialKeywords.slice(prevKeywordsLengthRef.current);
+      prevKeywordsLengthRef.current = initialKeywords.length;
+      setKeywords((prev) => {
+        const nonEmpty = prev.filter((k) => k.trim() !== "");
+        return [...nonEmpty, ...newOnes, ""];
+      });
+    }
+  }, [initialKeywords.length]);
 
   const [exportingGoogle, setExportingGoogle] = useState(false);
   const [exportingMeta, setExportingMeta] = useState(false);

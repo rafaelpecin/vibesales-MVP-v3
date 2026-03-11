@@ -93,3 +93,23 @@ export async function callGeminiForAds(prompt: string): Promise<AdsResult> {
 
   return parsed;
 }
+
+/**
+ * Low-level helper: calls Gemini and returns the parsed JSON response.
+ * Useful for one-off prompts that don't fit the SEO or Ads schemas.
+ */
+export async function callGeminiJson<T = unknown>(prompt: string): Promise<T> {
+  const genAI = getGenAI();
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+  const result = await model.generateContent(prompt);
+  const text = result.response.text();
+
+  const cleaned = text
+    .replace(/^```json\s*/i, "")
+    .replace(/^```\s*/i, "")
+    .replace(/```\s*$/i, "")
+    .trim();
+
+  return JSON.parse(cleaned) as T;
+}
