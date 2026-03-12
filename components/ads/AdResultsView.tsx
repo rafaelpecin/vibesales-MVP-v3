@@ -23,13 +23,14 @@ export function AdResultsView({
   descriptions: initialDescriptions,
   keywords: initialKeywords,
   url,
-  adSetId,
   onGenerateMoreKeywords,
 }: AdResultsViewProps) {
   const [shortTitles, setShortTitles] = useState<string[]>(initialShortTitles);
   const [longTitles, setLongTitles] = useState<string[]>(initialLongTitles);
   const [descriptions, setDescriptions] = useState<string[]>(initialDescriptions);
   const [keywords, setKeywords] = useState<string[]>([...initialKeywords, ""]);
+
+  // Only sync keywords — shortTitles/longTitles/descriptions are handled via key remount
   const prevKeywordsLengthRef = useRef(initialKeywords.length);
 
   useEffect(() => {
