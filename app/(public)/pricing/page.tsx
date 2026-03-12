@@ -158,8 +158,8 @@ function PlanCard({ plan, isCurrentPlan, onUpgrade, isPending, isLoggedIn }: Pla
       className={[
         "relative flex flex-col transition-shadow",
         plan.highlighted
-          ? "border-2 border-indigo-500 shadow-2xl dark:border-indigo-400"
-          : "border border-gray-200 shadow-sm dark:border-gray-800 dark:bg-gray-950",
+          ? "border-2 border-[#1A7A4A] shadow-2xl "
+          : "border border-gray-200 shadow-sm",
         plan.isComingSoon ? "opacity-60" : "",
       ]
         .filter(Boolean)
@@ -168,7 +168,7 @@ function PlanCard({ plan, isCurrentPlan, onUpgrade, isPending, isLoggedIn }: Pla
       {/* Badges */}
       {plan.highlighted && !plan.isComingSoon && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
-          <Badge className="gap-1 bg-gradient-to-r from-indigo-600 to-violet-600 text-white">
+          <Badge className="gap-1 bg-[#1A7A4A] text-white">
             <Zap className="h-3 w-3" /> Most Popular
           </Badge>
         </div>
@@ -187,27 +187,27 @@ function PlanCard({ plan, isCurrentPlan, onUpgrade, isPending, isLoggedIn }: Pla
       )}
 
       <CardHeader className="pb-3 pt-7">
-        <CardTitle className="flex items-center gap-2 text-lg font-bold text-gray-900 dark:text-white">
+        <CardTitle className="flex items-center gap-2 text-lg font-bold text-gray-900">
           {plan.id === "enterprise" && <Building2 className="h-4 w-4 text-gray-500" />}
           {plan.name}
         </CardTitle>
 
         <div className="mt-1">
           {plan.isComingSoon ? (
-            <p className="text-2xl font-extrabold text-gray-400 dark:text-gray-500">
+            <p className="text-2xl font-extrabold text-gray-400">
               Custom pricing
             </p>
           ) : plan.price === 0 ? (
-            <p className="text-3xl font-extrabold text-gray-900 dark:text-white">Free</p>
+            <p className="text-3xl font-extrabold text-gray-900">Free</p>
           ) : (
-            <p className="text-3xl font-extrabold text-gray-900 dark:text-white">
+            <p className="text-3xl font-extrabold text-gray-900">
               ${plan.price}
               <span className="text-base font-normal text-gray-500">/mo</span>
             </p>
           )}
         </div>
 
-        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{plan.description}</p>
+        <p className="mt-1 text-xs text-gray-500">{plan.description}</p>
       </CardHeader>
 
       <CardContent className="flex-1 pb-4">
@@ -215,14 +215,14 @@ function PlanCard({ plan, isCurrentPlan, onUpgrade, isPending, isLoggedIn }: Pla
           {plan.features.map((f) => (
             <li
               key={f.label}
-              className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300"
+              className="flex items-start gap-2 text-sm text-gray-700"
             >
               {f.included ? (
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#1A7A4A]" />
               ) : (
-                <X className="mt-0.5 h-4 w-4 shrink-0 text-gray-300 dark:text-gray-600" />
+                <X className="mt-0.5 h-4 w-4 shrink-0 text-gray-300" />
               )}
-              <span className={f.included ? "" : "text-gray-400 dark:text-gray-600"}>
+              <span className={f.included ? "" : "text-gray-400"}>
                 {f.label}
               </span>
             </li>
@@ -247,7 +247,7 @@ function PlanCard({ plan, isCurrentPlan, onUpgrade, isPending, isLoggedIn }: Pla
           <Button
             className={
               plan.highlighted
-                ? "w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white hover:from-indigo-700 hover:to-violet-700"
+                ? "w-full bg-[#1A7A4A] text-white hover:bg-[#155e3a]"
                 : "w-full"
             }
             onClick={handleClick}
@@ -311,16 +311,16 @@ export default function PricingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-950">
+    <main className="min-h-screen bg-white">
       {/* ── Hero ── */}
       <section className="px-4 pb-12 pt-20 text-center">
         <Badge variant="secondary" className="mb-4">
           Pricing
         </Badge>
-        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
+        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
           Simple, Transparent Pricing
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-lg text-gray-600 dark:text-gray-400">
+        <p className="mx-auto mt-4 max-w-xl text-lg text-gray-600">
           Start free, upgrade when you grow. No contracts. Cancel anytime.
         </p>
       </section>
@@ -328,7 +328,7 @@ export default function PricingPage() {
       {/* ── Plan Cards ── */}
       <section className="mx-auto max-w-6xl px-4 pb-20">
         {checkoutError && (
-          <div className="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-400">
+          <div className="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
             {checkoutError}
           </div>
         )}
@@ -338,7 +338,7 @@ export default function PricingPage() {
             {PRICING_PLANS.map((plan) => (
               <div
                 key={plan.id}
-                className="h-96 animate-pulse rounded-xl bg-gray-100 dark:bg-gray-800"
+                className="h-96 animate-pulse rounded-[8px] bg-gray-100"
               />
             ))}
           </div>
@@ -360,15 +360,15 @@ export default function PricingPage() {
 
       {/* ── Feature Comparison Table ── */}
       <section className="mx-auto max-w-6xl px-4 pb-24">
-        <h2 className="mb-8 text-center text-2xl font-bold text-gray-900 dark:text-white">
+        <h2 className="mb-8 text-center text-2xl font-bold text-gray-900">
           Full Feature Comparison
         </h2>
 
-        <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-800">
+        <div className="overflow-x-auto rounded-[8px] border border-gray-200">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
-                <th className="px-4 py-3 text-left font-semibold text-gray-700 dark:text-gray-300">
+              <tr className="border-b border-gray-200 bg-gray-50">
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">
                   Feature
                 </th>
                 {PRICING_PLANS.map((plan) => (
@@ -377,8 +377,8 @@ export default function PricingPage() {
                     className={[
                       "px-4 py-3 text-center font-semibold",
                       plan.highlighted
-                        ? "text-indigo-600 dark:text-indigo-400"
-                        : "text-gray-700 dark:text-gray-300",
+                        ? "text-[#1A7A4A]"
+                        : "text-gray-700",
                     ].join(" ")}
                   >
                     {plan.name}
@@ -400,23 +400,23 @@ export default function PricingPage() {
                 <tr
                   key={row.label}
                   className={[
-                    "border-b border-gray-100 last:border-0 dark:border-gray-800",
-                    i % 2 === 0 ? "" : "bg-gray-50/50 dark:bg-gray-900/30",
+                    "border-b border-gray-100 last:border-0",
+                    i % 2 === 0 ? "" : "bg-gray-50/50",
                   ].join(" ")}
                 >
-                  <td className="px-4 py-3 font-medium text-gray-700 dark:text-gray-300">
+                  <td className="px-4 py-3 font-medium text-gray-700">
                     {row.label}
                   </td>
                   {row.values.map((val, j) => (
                     <td key={j} className="px-4 py-3 text-center">
                       {typeof val === "boolean" ? (
                         val ? (
-                          <Check className="mx-auto h-4 w-4 text-indigo-500" />
+                          <Check className="mx-auto h-4 w-4 text-[#1A7A4A]" />
                         ) : (
-                          <X className="mx-auto h-4 w-4 text-gray-300 dark:text-gray-600" />
+                          <X className="mx-auto h-4 w-4 text-gray-300" />
                         )
                       ) : (
-                        <span className="text-gray-700 dark:text-gray-300">{val}</span>
+                        <span className="text-gray-700">{val}</span>
                       )}
                     </td>
                   ))}
@@ -428,15 +428,15 @@ export default function PricingPage() {
       </section>
 
       {/* ── FAQ / CTA ── */}
-      <section className="bg-gray-50 px-4 py-16 text-center dark:bg-gray-900">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+      <section className="bg-gray-50 px-4 py-16 text-center">
+        <h2 className="text-2xl font-bold text-gray-900">
           Questions? We&apos;re here to help.
         </h2>
-        <p className="mt-3 text-gray-600 dark:text-gray-400">
+        <p className="mt-3 text-gray-600">
           Reach out at{" "}
           <a
             href="mailto:support@vibesales.io"
-            className="text-indigo-600 underline dark:text-indigo-400"
+            className="text-[#1A7A4A] underline"
           >
             support@vibesales.io
           </a>{" "}

@@ -8,13 +8,13 @@ import { PLANS } from "@/constants/plans";
 /** Pricing preview section — full detail lives on /pricing. */
 export function PricingPreview() {
   return (
-    <section className="bg-white py-20 px-4 dark:bg-gray-900">
+    <section className="bg-white py-20 px-4 ">
       <div className="mx-auto max-w-5xl">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-[#1A1F2E]  sm:text-4xl">
             Simple, Transparent Pricing
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+          <p className="mt-4 text-lg text-[#64748B] ">
             Start free, upgrade when you grow. No contracts, cancel anytime.
           </p>
         </div>
@@ -25,39 +25,39 @@ export function PricingPreview() {
               key={plan.id}
               className={
                 plan.highlighted
-                  ? "relative border-2 border-indigo-500 shadow-xl dark:border-indigo-400"
-                  : "border border-gray-200 shadow-sm dark:border-gray-800 dark:bg-gray-950"
+                  ? "relative border-2 border-[#1A7A4A] shadow-xl"
+                  : "border border-gray-200 shadow-sm  "
               }
             >
               {plan.highlighted && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <Badge className="gap-1 bg-gradient-to-r from-indigo-600 to-violet-600 text-white">
+                  <Badge className="gap-1 bg-gradient-to-r from-[#1A7A4A] to-[#1B4F8A] text-white">
                     <Zap className="h-3 w-3" /> Most Popular
                   </Badge>
                 </div>
               )}
 
               <CardHeader className="pb-3 pt-6">
-                <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">
+                <CardTitle className="text-lg font-bold text-[#1A1F2E] ">
                   {plan.name}
                 </CardTitle>
 
                 {plan.isComingSoon ? (
-                  <p className="mt-1 text-2xl font-extrabold text-gray-400 dark:text-gray-500">
+                  <p className="mt-1 text-2xl font-extrabold text-gray-400">
                     Coming Soon
                   </p>
                 ) : plan.priceMonthly === 0 ? (
-                  <p className="mt-1 text-3xl font-extrabold text-gray-900 dark:text-white">
+                  <p className="mt-1 text-3xl font-extrabold text-[#1A1F2E] ">
                     Free
                   </p>
                 ) : (
-                  <p className="mt-1 text-3xl font-extrabold text-gray-900 dark:text-white">
+                  <p className="mt-1 text-3xl font-extrabold text-[#1A1F2E] ">
                     ${plan.priceMonthly}
-                    <span className="text-base font-normal text-gray-500">/mo</span>
+                    <span className="text-base font-normal text-[#64748B]">/mo</span>
                   </p>
                 )}
 
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                <p className="mt-1 text-xs text-[#64748B] ">
                   {plan.description}
                 </p>
               </CardHeader>
@@ -65,8 +65,8 @@ export function PricingPreview() {
               <CardContent className="pb-4">
                 <ul className="space-y-2">
                   {plan.features.slice(0, 4).map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
+                    <li key={f} className="flex items-start gap-2 text-sm text-[#1A1F2E] ">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#1A7A4A]" />
                       {f}
                     </li>
                   ))}
@@ -81,7 +81,7 @@ export function PricingPreview() {
                 ) : plan.priceMonthly === 0 ? (
                   <Button
                     asChild
-                    className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white hover:from-indigo-700 hover:to-violet-700"
+                    className="w-full bg-gradient-to-r from-[#1A7A4A] to-[#1B4F8A] text-white hover:from-[#155e3a] hover:to-[#163f6e]"
                   >
                     <Link href="/register">Get Started Free</Link>
                   </Button>
@@ -91,7 +91,7 @@ export function PricingPreview() {
                     variant={plan.highlighted ? "default" : "outline"}
                     className={
                       plan.highlighted
-                        ? "w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white hover:from-indigo-700 hover:to-violet-700"
+                        ? "w-full bg-gradient-to-r from-[#1A7A4A] to-[#1B4F8A] text-white hover:from-[#155e3a] hover:to-[#163f6e]"
                         : "w-full"
                     }
                   >
@@ -103,11 +103,11 @@ export function PricingPreview() {
           ))}
         </div>
 
-        <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+        <p className="mt-8 text-center text-sm text-[#64748B] ">
           Need a deeper look?{" "}
           <Link
             href="/pricing"
-            className="font-medium text-indigo-600 underline-offset-4 hover:underline dark:text-indigo-400"
+            className="font-medium text-[#1A7A4A] underline-offset-4 hover:underline"
           >
             See full pricing details →
           </Link>

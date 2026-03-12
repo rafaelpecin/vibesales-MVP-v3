@@ -151,7 +151,7 @@ export function AdGeneratorForm({ initialUrl = "" }: AdGeneratorFormProps) {
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* URL input */}
         <div>
-          <label htmlFor="ads-url" className="block text-sm font-medium text-gray-700 mb-1.5">
+          <label htmlFor="ads-url" className="block text-sm font-medium text-[#1A1F2E] mb-1.5">
             Website URL
           </label>
           <input
@@ -162,23 +162,23 @@ export function AdGeneratorForm({ initialUrl = "" }: AdGeneratorFormProps) {
             onChange={(e) => setUrl(e.target.value)}
             disabled={loading}
             required
-            className="w-full h-12 px-4 rounded-xl border border-gray-300 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className="w-full h-12 px-4 rounded-[8px] border border-gray-300 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1A7A4A] focus:border-[#1A7A4A] disabled:bg-[#F8FAFC] disabled:cursor-not-allowed"
           />
         </div>
 
         {/* Platform tabs */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Platform</label>
-          <div className="flex gap-1 rounded-xl border border-gray-200 bg-gray-100 p-1 w-fit">
+          <label className="block text-sm font-medium text-[#1A1F2E] mb-1.5">Platform</label>
+          <div className="flex gap-1 rounded-[8px] border border-[#E2E8F0] bg-[#F8FAFC] p-1 w-fit">
             {PLATFORMS.map(({ value, label }) => (
               <button
                 key={value}
                 type="button"
                 onClick={() => setPlatform(value)}
-                className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-4 py-1.5 rounded-[8px] text-sm font-medium transition-colors ${
                   platform === value
-                    ? "bg-white text-indigo-700 shadow-sm"
-                    : "text-gray-600 hover:text-gray-800"
+                    ? "bg-white text-[#1A7A4A] shadow-sm"
+                    : "text-[#64748B] hover:text-[#1A1F2E]"
                 }`}
               >
                 {label}
@@ -190,15 +190,15 @@ export function AdGeneratorForm({ initialUrl = "" }: AdGeneratorFormProps) {
         {/* Usage counter */}
         {usage !== null && (
           <div className="flex flex-wrap gap-x-5 gap-y-1">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-[#64748B]">
               Ads generated today:{" "}
-              <span className={`font-medium ${limitReached ? "text-red-500" : "text-gray-700"}`}>
+              <span className={`font-medium ${limitReached ? "text-[#EF4444]" : "text-[#1A1F2E]"}`}>
                 {usage.adsUsed} / {usage.maxAds > 0 ? usage.maxAds : "∞"}
               </span>
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-[#64748B]">
               Keywords generated today:{" "}
-              <span className="font-medium text-gray-700">
+              <span className="font-medium text-[#1A1F2E]">
                 {usage.keywordsUsed} / {usage.maxKeywords > 0 ? usage.maxKeywords : "∞"}
               </span>
             </p>
@@ -207,7 +207,7 @@ export function AdGeneratorForm({ initialUrl = "" }: AdGeneratorFormProps) {
 
         {/* Error */}
         {error && (
-          <div className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <div className="flex items-start gap-2 rounded-[8px] border border-[#FECACA] bg-[#FEF2F2] px-4 py-3 text-sm text-[#991B1B]">
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
             <span>{error}</span>
           </div>
@@ -216,10 +216,10 @@ export function AdGeneratorForm({ initialUrl = "" }: AdGeneratorFormProps) {
         {/* Submit / limit reached */}
         {limitReached ? (
           <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-500">Daily limit reached.</span>
+            <span className="text-sm text-[#64748B]">Daily limit reached.</span>
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-[8px] bg-[#1A7A4A] text-white text-sm font-medium hover:bg-[#155e3a] transition-colors"
             >
               <Zap className="w-3.5 h-3.5" />
               Upgrade
@@ -229,7 +229,7 @@ export function AdGeneratorForm({ initialUrl = "" }: AdGeneratorFormProps) {
           <button
             type="submit"
             disabled={loading || !url.trim()}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-2 px-6 py-3 rounded-[8px] bg-[#1A7A4A] text-white font-medium hover:bg-[#155e3a] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {loading ? (
               <>

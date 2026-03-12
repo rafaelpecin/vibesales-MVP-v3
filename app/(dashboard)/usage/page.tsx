@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { PLANS } from "@/constants/plans";
 import type { Plan } from "@/types";
+import { UsageIndicator } from "@/components/layout/UsageIndicator";
+import { PageHeader } from "@/components/layout/PageHeader";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -62,18 +64,18 @@ function UsageBar({
   const unlimited = max === 0; // 0 in the DB means unlimited for pro-tier
   const pct = unlimited || max === 0 ? 0 : Math.min(100, Math.round((used / max) * 100));
   const barColour =
-    pct >= 90 ? "bg-red-500" : pct >= 70 ? "bg-yellow-500" : "bg-indigo-500";
+    pct >= 90 ? "bg-[#EF4444]" : pct >= 70 ? "bg-[#F59E0B]" : "bg-[#1A7A4A]";
 
   return (
     <div>
       <div className="mb-1 flex items-center justify-between text-sm">
-        <span className="font-medium text-gray-700">{label}</span>
-        <span className="text-gray-500">
+        <span className="font-medium text-[#1A1F2E]">{label}</span>
+        <span className="text-[#64748B]">
           {unlimited ? `${used} / ∞` : `${used} / ${max}`}
         </span>
       </div>
       {!unlimited && (
-        <div className="h-2 w-full overflow-hidden rounded-full bg-gray-100">
+        <div className="h-2 w-full overflow-hidden rounded-full bg-[#F1F5F9]">
           <div
             className={`h-2 rounded-full transition-all ${barColour}`}
             style={{ width: `${pct}%` }}
@@ -87,7 +89,7 @@ function UsageBar({
 function TruncatedUrl({ url }: { url: string }) {
   const display = url.length > 50 ? url.slice(0, 50) + "…" : url;
   return (
-    <span title={url} className="cursor-default font-mono text-xs text-gray-700">
+    <span title={url} className="cursor-default font-mono text-xs text-[#1A1F2E]">
       {display}
     </span>
   );
@@ -198,10 +200,10 @@ export default function UsagePage() {
 
   if (loading) {
     return (
-      <main className="mx-auto max-w-3xl px-4 py-12">
+      <main className="px-8 py-8 max-w-5xl">
         <div className="space-y-4">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-32 animate-pulse rounded-2xl bg-gray-100" />
+            <div key={i} className="h-32 animate-pulse rounded-[12px] bg-[#F1F5F9]" />
           ))}
         </div>
       </main>
@@ -209,27 +211,27 @@ export default function UsagePage() {
   }
 
   return (
-    <main className="mx-auto max-w-3xl space-y-6 px-4 py-12">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Usage</h1>
-        <p className="mt-1 text-sm text-gray-500">
-          Track your daily usage and scan history.
-        </p>
-      </div>
+    <main className="px-8 py-8 max-w-5xl space-y-6">
+      <PageHeader
+        title="Usage"
+        subtitle="Today's activity and full scan history."
+      />
+
+      <UsageIndicator />
 
       {/* ── Plan summary card ───────────────────────────────────────────── */}
-      <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+      <section className="rounded-[12px] border border-[#E2E8F0] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.04)]">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">{planName} Plan</h2>
+            <h2 className="text-lg font-semibold text-[#1A1F2E]">{planName} Plan</h2>
             {constantPlan && (
-              <p className="mt-1 text-sm text-gray-500">{constantPlan.description}</p>
+              <p className="mt-1 text-sm text-[#64748B]">{constantPlan.description}</p>
             )}
           </div>
           {isUpgradeable && (
             <a
               href="/pricing"
-              className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+              className="rounded-lg bg-[#1A7A4A] px-4 py-2 text-sm font-medium text-white hover:bg-[#155e3a]"
             >
               Upgrade Plan
             </a>
@@ -241,7 +243,7 @@ export default function UsagePage() {
             {constantPlan.features.map((f) => (
               <li
                 key={f}
-                className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700"
+                className="rounded-full bg-[#f0fdf8] px-3 py-1 text-xs font-medium text-[#1A7A4A]"
               >
                 {f}
               </li>
@@ -251,8 +253,8 @@ export default function UsagePage() {
       </section>
 
       {/* ── Today's usage progress bars ─────────────────────────────────── */}
-      <section className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-5 text-lg font-semibold text-gray-900">Today&apos;s Usage</h2>
+      <section className="rounded-[12px] border border-[#E2E8F0] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.04)]">
+        <h2 className="mb-5 text-lg font-semibold text-[#1A1F2E]">Today&apos;s Usage</h2>
         <div className="space-y-4">
           <UsageBar
             label="Scans"
@@ -273,16 +275,16 @@ export default function UsagePage() {
       </section>
 
       {/* ── Scan history table ──────────────────────────────────────────── */}
-      <section className="rounded-2xl border border-gray-200 bg-white shadow-sm">
-        <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
-          <h2 className="text-lg font-semibold text-gray-900">Scan History</h2>
-          <span className="text-sm text-gray-500">{totalScans} total</span>
+      <section className="rounded-[12px] border border-[#E2E8F0] bg-white shadow-sm">
+        <div className="flex items-center justify-between border-b border-[#E2E8F0] px-6 py-4">
+          <h2 className="text-lg font-semibold text-[#1A1F2E]">Scan History</h2>
+          <span className="text-sm text-[#64748B]">{totalScans} total</span>
         </div>
 
         {scans.length === 0 ? (
-          <div className="px-6 py-10 text-center text-sm text-gray-500">
+          <div className="px-6 py-10 text-center text-sm text-[#64748B]">
             No scans yet.{" "}
-            <a href="/dashboard" className="text-indigo-600 underline">
+            <a href="/dashboard" className="text-[#1A7A4A] underline">
               Run your first scan
             </a>
             .
@@ -292,17 +294,17 @@ export default function UsagePage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-100 bg-gray-50 text-left">
-                    <th className="px-6 py-3 font-medium text-gray-600">Date</th>
-                    <th className="px-6 py-3 font-medium text-gray-600">URL</th>
-                    <th className="px-6 py-3 font-medium text-gray-600">SEO Score</th>
-                    <th className="px-6 py-3 font-medium text-gray-600">Action</th>
+                  <tr className="border-b border-[#E2E8F0] bg-[#F8FAFC] text-left">
+                    <th className="px-6 py-3 text-xs font-semibold text-[#64748B] uppercase tracking-[0.05em]">Date</th>
+                    <th className="px-6 py-3 text-xs font-semibold text-[#64748B] uppercase tracking-[0.05em]">URL</th>
+                    <th className="px-6 py-3 text-xs font-semibold text-[#64748B] uppercase tracking-[0.05em]">Score</th>
+                    <th className="px-6 py-3 text-xs font-semibold text-[#64748B] uppercase tracking-[0.05em]">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-[#F8FAFC]">
                   {scans.map((scan) => (
-                    <tr key={scan.id} className="hover:bg-gray-50">
-                      <td className="whitespace-nowrap px-6 py-3 text-gray-500">
+                    <tr key={scan.id} className="hover:bg-[rgba(26,122,74,0.03)] transition-colors duration-100">
+                      <td className="whitespace-nowrap px-6 py-3 text-[#64748B]">
                         {new Date(scan.created_at).toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",
@@ -322,7 +324,7 @@ export default function UsagePage() {
                               `/dashboard?url=${encodeURIComponent(scan.url)}`,
                             )
                           }
-                          className="rounded-md border border-indigo-300 px-2.5 py-1 text-xs font-medium text-indigo-700 hover:bg-indigo-50"
+                          className="rounded-md border border-[#bbf7d0] px-2.5 py-1 text-xs font-medium text-[#1A7A4A] hover:bg-[#f0fdf8]"
                         >
                           Re-scan
                         </button>
@@ -335,21 +337,21 @@ export default function UsagePage() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-between border-t border-gray-100 px-6 py-4">
+              <div className="flex items-center justify-between border-t border-[#E2E8F0] px-6 py-4">
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-40"
+                  className="rounded-lg border border-[#E2E8F0] px-3 py-1.5 text-sm font-medium text-[#1A1F2E] hover:bg-[#F8FAFC] disabled:opacity-40"
                 >
                   Previous
                 </button>
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-[#64748B]">
                   Page {page} of {totalPages}
                 </span>
                 <button
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                   disabled={page === totalPages}
-                  className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-40"
+                  className="rounded-lg border border-[#E2E8F0] px-3 py-1.5 text-sm font-medium text-[#1A1F2E] hover:bg-[#F8FAFC] disabled:opacity-40"
                 >
                   Next
                 </button>
@@ -361,16 +363,16 @@ export default function UsagePage() {
 
       {/* ── Upgrade CTA (bottom) ────────────────────────────────────────── */}
       {isUpgradeable && (
-        <div className="rounded-2xl border border-indigo-200 bg-indigo-50 px-6 py-5">
-          <p className="text-sm font-medium text-indigo-900">
+        <div className="rounded-[12px] border border-[#bbf7d0] bg-[#f0fdf8] px-6 py-5">
+          <p className="text-sm font-medium text-[#104832]">
             Need more scans and ad sets?
           </p>
-          <p className="mt-1 text-sm text-indigo-700">
+          <p className="mt-1 text-sm text-[#1A7A4A]">
             Upgrade to the Pro plan for unlimited scans, ad sets, and priority AI processing.
           </p>
           <a
             href="/pricing"
-            className="mt-3 inline-block rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+            className="mt-3 inline-block rounded-lg bg-[#1A7A4A] px-4 py-2 text-sm font-medium text-white hover:bg-[#155e3a]"
           >
             View Plans
           </a>

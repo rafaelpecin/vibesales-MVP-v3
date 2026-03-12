@@ -105,14 +105,14 @@ export function AdResultsView({
 
   return (
     <div className="space-y-6">
-      <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+      <div className="overflow-x-auto rounded-[12px] border border-[#E2E8F0] shadow-sm">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-gray-200 bg-gray-50">
+            <tr className="border-b border-[#E2E8F0] bg-[#F8FAFC]">
               {sections.map(({ key, label }) => (
                 <th
                   key={key}
-                  className="px-4 py-3 text-left font-semibold text-gray-700 whitespace-nowrap"
+                  className="px-4 py-3 text-left font-semibold text-[#1A1F2E] whitespace-nowrap"
                 >
                   {label}
                 </th>
@@ -123,7 +123,7 @@ export function AdResultsView({
             {Array.from({ length: maxRows }).map((_, rowIndex) => (
               <tr
                 key={rowIndex}
-                className="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors"
+                className="border-b border-[#F1F5F9] last:border-0 hover:bg-[#F8FAFC] transition-colors"
               >
                 {sections.map(({ key, items }) => (
                   <td key={key} className="px-3 py-2 align-top">
@@ -132,7 +132,7 @@ export function AdResultsView({
                         type="text"
                         value={items[rowIndex]}
                         onChange={(e) => updateItem(key, rowIndex, e.target.value)}
-                        className="w-full min-w-[160px] rounded-lg border border-transparent bg-transparent px-2 py-1 text-gray-800 focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-400 transition-all"
+                        className="w-full min-w-[160px] rounded-[8px] border border-transparent bg-transparent px-2 py-1 text-[#1A1F2E] focus:border-[#1A7A4A] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[rgba(26,122,74,0.3)] transition-all"
                         placeholder={
                           key === "keywords" && rowIndex === items.length - 1
                             ? "Add keyword…"
@@ -154,7 +154,7 @@ export function AdResultsView({
         <button
           onClick={handleExportGoogle}
           disabled={exportingGoogle}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-[8px] bg-[#1A7A4A] text-white font-medium hover:bg-[#155e3a] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
         >
           {exportingGoogle ? (
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -167,7 +167,7 @@ export function AdResultsView({
         <button
           onClick={handleExportMeta}
           disabled={exportingMeta}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-[8px] bg-[#1B4F8A] text-white font-medium hover:bg-[#163f6e] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
         >
           {exportingMeta ? (
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -180,7 +180,7 @@ export function AdResultsView({
         {onGenerateMoreKeywords && (
           <button
             onClick={onGenerateMoreKeywords}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-[8px] border border-[#E2E8F0] text-[#1A1F2E] font-medium hover:bg-[#F8FAFC] transition-colors"
           >
             + More Keywords
           </button>

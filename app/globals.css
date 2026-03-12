@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ────────────────────────────────────────────────────────── */
+:root {
+  /* shadcn/ui CSS variables (HSL channel values only, no hsl() wrapper) */
+  --background: 90 13% 97%;          /* #F7F8F6 */
+  --foreground: 225 28% 14%;         /* #1A1F2E */
+
+  --card: 0 0% 100%;                 /* #FFFFFF */
+  --card-foreground: 225 28% 14%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 225 28% 14%;
+
+  --primary: 150 65% 29%;            /* #1A7A4A */
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 212 67% 32%;          /* #1B4F8A */
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 214 32% 95%;
+  --muted-foreground: 215 16% 47%;   /* #64748B */
+
+  --accent: 148 62% 49%;             /* #2ECC7A */
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 84% 60%;          /* #EF4444 */
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 214 32% 91%;             /* #E2E8F0 */
+  --input: 214 32% 91%;
+  --ring: 150 65% 29%;               /* matches primary */
+
+  --radius: 0.75rem;                 /* 12px */
+
+  /* Extended palette */
+  --color-bg: #F7F8F6;
+  --color-surface: #FFFFFF;
+  --color-primary: #1A7A4A;
+  --color-primary-hover: #155e3a;
+  --color-primary-light: #2ECC7A;
+  --color-secondary: #1B4F8A;
+  --color-secondary-hover: #163f6e;
+  --color-secondary-light: #3B82F6;
+  --color-text-primary: #1A1F2E;
+  --color-text-secondary: #64748B;
+  --color-border: #E2E8F0;
+  --color-success: #10B981;
+  --color-danger: #EF4444;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+    color: var(--color-text-primary);
+    line-height: 1.25;
+  }
+}
+
+/* ─── Component Utilities ──────────────────────────────────────────────────── */
+@layer components {
+  /* Cards */
+  .vs-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Primary button */
+  .vs-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .vs-btn-primary:hover:not(:disabled) {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26,122,74,0.25);
+  }
+  .vs-btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Secondary/outline button */
+  .vs-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background-color: transparent;
+    color: var(--color-secondary);
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--color-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .vs-btn-outline:hover:not(:disabled) {
+    background-color: rgba(27,79,138,0.06);
+    transform: translateY(-1px);
+  }
+  .vs-btn-outline:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Standard input */
+  .vs-input {
+    width: 100%;
+    height: 44px;
+    padding: 0 14px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    transition: all 0.15s ease;
+    outline: none;
+  }
+  .vs-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(26,122,74,0.12);
+  }
+  .vs-input:disabled {
+    background: #F1F5F9;
+    cursor: not-allowed;
+  }
+
+  /* Badge */
+  .vs-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Alert variants */
+  .vs-alert-success {
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  .vs-alert-error {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: #991B1B;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  .vs-alert-warning {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    color: #92400E;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  .vs-alert-info {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    color: #1E3A5F;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}

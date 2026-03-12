@@ -16,27 +16,27 @@ export function SeoSuggestions({ suggestions }: SeoSuggestionsProps) {
       {suggestions.map(([topic, items], idx) => {
         const isOpen = openIndex === idx;
         return (
-          <div key={idx} className="border border-gray-200 rounded-lg overflow-hidden">
+          <div key={idx} className="border border-[#E2E8F0] rounded-[8px] overflow-hidden">
             <button
               type="button"
-              className="w-full flex items-center justify-between px-4 py-3 text-left bg-white hover:bg-gray-50 transition-colors"
+              className="w-full flex items-center justify-between px-4 py-3 text-left bg-white hover:bg-[#F8FAFC] transition-all duration-150"
               onClick={() => setOpenIndex(isOpen ? null : idx)}
               aria-expanded={isOpen}
             >
-              <span className="font-medium text-gray-800">{topic}</span>
+              <span className="font-medium text-[#1A1F2E]">{topic}</span>
               <ChevronDown
                 className={cn(
-                  "w-4 h-4 text-gray-500 transition-transform duration-200 shrink-0",
+                  "w-4 h-4 text-[#64748B] transition-transform duration-200 shrink-0",
                   isOpen && "rotate-180",
                 )}
               />
             </button>
             {isOpen && (
-              <div className="px-4 pb-4 pt-1 bg-gray-50 border-t border-gray-100">
+              <div className="px-4 pb-4 pt-1 bg-[#F8FAFC] border-t border-[#E2E8F0]">
                 <ul className="space-y-2">
                   {items.map((suggestion, sIdx) => (
-                    <li key={sIdx} className="flex items-start gap-2 text-sm text-gray-700">
-                      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-indigo-500 shrink-0" />
+                    <li key={sIdx} className="flex items-start gap-2 text-sm text-[#1A1F2E]">
+                      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#1A7A4A] shrink-0" />
                       {suggestion}
                     </li>
                   ))}

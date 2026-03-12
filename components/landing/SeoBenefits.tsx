@@ -22,13 +22,13 @@ const benefits = [
 /** SEO benefits section explaining why organic search still matters in 2026. */
 export function SeoBenefits() {
   return (
-    <section className="bg-white py-20 px-4 dark:bg-gray-900">
+    <section className="bg-white py-20 px-4 ">
       <div className="mx-auto max-w-5xl">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-[#1A1F2E]  sm:text-4xl">
             Why SEO Still Matters in 2026?
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+          <p className="mt-4 text-lg text-[#64748B] ">
             AI-generated content flooded the web. That makes technical SEO and trust signals more
             valuable than ever.
           </p>
@@ -38,18 +38,18 @@ export function SeoBenefits() {
           {benefits.map((b) => (
             <Card
               key={b.title}
-              className="border border-gray-200 shadow-sm transition-shadow hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
+              className="border border-gray-200 shadow-sm transition-shadow hover:shadow-md  "
             >
               <CardHeader className="pb-3">
-                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-900/40">
-                  <b.icon className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-[#f0fdf8] dark:bg-[#1A7A4A]/10">
+                  <b.icon className="h-5 w-5 text-[#1A7A4A] dark:text-[#2ECC7A]" />
                 </div>
-                <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">
+                <CardTitle className="text-lg font-bold text-[#1A1F2E] ">
                   {b.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{b.body}</p>
+                <p className="text-sm leading-relaxed text-[#64748B] ">{b.body}</p>
               </CardContent>
             </Card>
           ))}

@@ -170,15 +170,15 @@ function FaqAccordionItem({
   return (
     <Accordion.Item
       value={value}
-      className="border border-white/10 rounded-xl overflow-hidden bg-white/5 backdrop-blur-sm transition-colors data-[state=open]:bg-white/10"
+      className="border border-white/10 rounded-[8px] overflow-hidden bg-white/5 backdrop-blur-sm transition-colors data-[state=open]:bg-white/10"
     >
       <Accordion.Header asChild>
         <h3>
-          <Accordion.Trigger className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-medium text-white hover:text-indigo-300 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+          <Accordion.Trigger className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-medium text-white hover:text-[#2ECC7A] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A7A4A]">
             <span>{item.q}</span>
             <ChevronDown
               size={16}
-              className="shrink-0 text-indigo-400 transition-transform duration-300 group-data-[state=open]:rotate-180"
+              className="shrink-0 text-[#2ECC7A] transition-transform duration-300 group-data-[state=open]:rotate-180"
               aria-hidden
             />
           </Accordion.Trigger>
@@ -214,7 +214,7 @@ function SectionBlock({
         id={`section-${section.id}`}
         className="text-lg font-semibold text-white mb-3 flex items-center gap-2"
       >
-        <span className="inline-block w-1.5 h-5 rounded-full bg-indigo-500" aria-hidden />
+        <span className="inline-block w-1.5 h-5 rounded-full bg-[#1A7A4A]" aria-hidden />
         {section.title}
       </h2>
       <Accordion.Root type="single" collapsible className="space-y-2">
@@ -249,10 +249,10 @@ export default function HelpPage() {
   }, [query]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 px-4 py-20">
+    <main className="min-h-screen bg-[#1A1F2E] px-4 py-20">
       {/* Header */}
       <div className="max-w-2xl mx-auto text-center mb-12">
-        <p className="text-indigo-400 text-sm font-medium tracking-widest uppercase mb-3">
+        <p className="text-[#2ECC7A] text-sm font-medium tracking-widest uppercase mb-3">
           Support
         </p>
         <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
@@ -269,7 +269,7 @@ export default function HelpPage() {
         <div className="relative">
           <Search
             size={16}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#64748B] pointer-events-none"
             aria-hidden
           />
           <input
@@ -279,7 +279,7 @@ export default function HelpPage() {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setQuery(e.target.value)
             }
-            className="w-full pl-10 pr-4 h-11 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+            className="w-full pl-10 pr-4 h-11 rounded-[8px] bg-white/5 border border-white/10 text-white text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#1A7A4A] focus:ring-2 focus:ring-[#1A7A4A]/30"
             aria-label="Search FAQ"
           />
         </div>
@@ -292,7 +292,7 @@ export default function HelpPage() {
         ))}
 
         {!hasResults && (
-          <div className="text-center py-16 text-slate-500">
+          <div className="text-center py-16 text-[#64748B]">
             <p className="text-base">
               No results for{" "}
               <span className="text-slate-300 font-medium">
@@ -304,7 +304,7 @@ export default function HelpPage() {
               Try different keywords or{" "}
               <a
                 href="mailto:support@vibesales.com"
-                className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+                className="text-[#2ECC7A] hover:text-[#2ECC7A] underline underline-offset-2"
               >
                 contact support
               </a>
@@ -325,7 +325,7 @@ export default function HelpPage() {
         </p>
         <a
           href="mailto:support@vibesales.com"
-          className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 transition-colors text-white text-sm font-medium px-5 py-2.5"
+          className="inline-flex items-center gap-2 rounded-[8px] bg-[#1A7A4A] hover:bg-[#2ECC7A] transition-colors text-white text-sm font-medium px-5 py-2.5"
         >
           Contact Support
         </a>

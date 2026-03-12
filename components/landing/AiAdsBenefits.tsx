@@ -22,13 +22,13 @@ const platforms = [
 /** AI ad generation benefits section. */
 export function AiAdsBenefits() {
   return (
-    <section className="bg-gradient-to-br from-indigo-50 to-violet-50 py-20 px-4 dark:from-gray-950 dark:to-indigo-950">
+    <section className="bg-gradient-to-br from-[#f0fdf8] to-[#eff6ff] py-20 px-4 ">
       <div className="mx-auto max-w-5xl">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-[#1A1F2E]  sm:text-4xl">
             Stop Guessing. Start Converting.
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+          <p className="mt-4 text-lg text-[#64748B] ">
             AI-generated titles, descriptions, and keywords for every major ad platform —
             with CSV export so your team can ship immediately.
           </p>
@@ -38,25 +38,25 @@ export function AiAdsBenefits() {
           {platforms.map((p) => (
             <Card
               key={p.title}
-              className="border border-indigo-100 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-indigo-900/50 dark:bg-gray-900"
+              className="border border-[#E2E8F0] bg-white shadow-sm transition-shadow hover:shadow-md  "
             >
               <CardHeader className="pb-3">
-                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-violet-50 dark:bg-violet-900/40">
-                  <p.icon className="h-5 w-5 text-violet-600 dark:text-violet-400" />
+                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-[#f0fdf8]">
+                  <p.icon className="h-5 w-5 text-[#1A7A4A]" />
                 </div>
-                <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">
+                <CardTitle className="text-lg font-bold text-[#1A1F2E] ">
                   {p.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{p.body}</p>
+                <p className="text-sm leading-relaxed text-[#64748B] ">{p.body}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* CSV export callout */}
-        <div className="mt-10 flex items-center justify-center gap-3 rounded-xl border border-indigo-200 bg-white px-6 py-4 text-sm font-medium text-indigo-700 shadow-sm dark:border-indigo-800 dark:bg-gray-900 dark:text-indigo-300">
+        <div className="mt-10 flex items-center justify-center gap-3 rounded-[8px] border border-[#bbf7d0] bg-white px-6 py-4 text-sm font-medium text-[#1A7A4A] shadow-sm ">
           <FileDown className="h-5 w-5 shrink-0" />
           All ad sets are exportable to CSV — import directly into Google Ads, Meta Business
           Manager, or Microsoft Advertising.

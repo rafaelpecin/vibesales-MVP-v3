@@ -28,13 +28,13 @@ const testimonials = [
 /** Social proof section with placeholder testimonial cards. */
 export function Testimonials() {
   return (
-    <section className="bg-gradient-to-br from-indigo-50 to-violet-50 py-20 px-4 dark:from-gray-950 dark:to-indigo-950">
+    <section className="bg-gradient-to-br from-[#f0fdf8] to-[#eff6ff] py-20 px-4">
       <div className="mx-auto max-w-5xl">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-[#1A1F2E]  sm:text-4xl">
             Loved by Marketers &amp; Founders
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+          <p className="mt-4 text-lg text-[#64748B] ">
             Join thousands of businesses already growing with Vibe Sales.
           </p>
         </div>
@@ -43,7 +43,7 @@ export function Testimonials() {
           {testimonials.map((t) => (
             <Card
               key={t.name}
-              className="border border-indigo-100 bg-white shadow-sm dark:border-indigo-900/50 dark:bg-gray-900"
+              className="border border-[#E2E8F0] bg-white shadow-sm "
             >
               <CardContent className="p-6">
                 {/* Stars */}
@@ -57,17 +57,17 @@ export function Testimonials() {
                   ))}
                 </div>
 
-                <blockquote className="mb-5 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+                <blockquote className="mb-5 text-sm leading-relaxed text-[#1A1F2E] ">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
 
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-xs font-bold text-white">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1A7A4A] text-xs font-bold text-white">
                     {t.avatar}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{t.name}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{t.role}</p>
+                    <p className="text-sm font-semibold text-[#1A1F2E] ">{t.name}</p>
+                    <p className="text-xs text-[#64748B] ">{t.role}</p>
                   </div>
                 </div>
               </CardContent>

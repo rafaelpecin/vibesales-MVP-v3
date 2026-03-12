@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { AdGeneratorForm } from "@/components/ads/AdGeneratorForm";
+import { UsageIndicator } from "@/components/layout/UsageIndicator";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { Info } from "lucide-react";
 
 interface AdsPageProps {
@@ -23,22 +25,26 @@ export default async function AdsPage({ searchParams }: AdsPageProps) {
   const scanId = params.scanId ?? params.scan_id ?? "";
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-12">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Generate Ads</h1>
-        <p className="mt-2 text-gray-500">
-          Generate AI-powered ad copy for Google, Meta, or Bing from any URL.
-        </p>
-      </div>
+    <main className="px-8 py-8 max-w-5xl">
+      <PageHeader
+        title="Ad Generator"
+        subtitle="Create high-converting ad copy for Google, Meta, or Bing from any URL."
+        backHref="/dashboard"
+        backLabel="SEO Scan"
+      />
+
+      <UsageIndicator />
 
       {scanId && (
-        <div className="mb-6 flex items-start gap-3 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-3 text-sm text-indigo-800">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
-          <span>Generating ads based on your SEO scan.</span>
+        <div className="vs-alert-info mt-4 flex items-start gap-3">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#1B4F8A]" />
+          <span>Generating ads based on your SEO scan results.</span>
         </div>
       )}
 
-      <AdGeneratorForm initialUrl={url} />
+      <div className="mt-6 rounded-[12px] border border-[#E2E8F0] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.04)]">
+        <AdGeneratorForm initialUrl={url} />
+      </div>
     </main>
   );
 }

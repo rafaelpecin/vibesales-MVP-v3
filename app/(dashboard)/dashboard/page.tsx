@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { createClient, ensureUserProfile } from "@/lib/supabase/server";
 import { UrlInputForm } from "@/components/seo/UrlInputForm";
+import { UsageIndicator } from "@/components/layout/UsageIndicator";
+import { PageHeader } from "@/components/layout/PageHeader";
 
 export default async function DashboardPage({
   searchParams,
@@ -42,17 +44,17 @@ export default async function DashboardPage({
   const scansUsed = usageRow?.scans_used ?? 0;
 
   return (
-    <main className="mx-auto max-w-2xl px-4 py-12">
-      <div className="mb-10 text-center">
-        <h1 className="text-3xl font-bold text-gray-900">
-          Welcome back, {firstName}!
-        </h1>
-        <p className="mt-2 text-gray-500">
-          Enter a URL below to analyse its SEO health with AI.
-        </p>
-      </div>
+    <main className="px-8 py-8 max-w-3xl"  style={{ margin: 20}}>
+      <PageHeader
+        title={`Welcome back, ${firstName}!`}
+        subtitle="Paste a URL to run an AI-powered SEO audit in seconds."
+      />
 
-      <UrlInputForm scansUsed={scansUsed} maxScans={maxScans} initialUrl={initialUrl ?? ""} />
+      <UsageIndicator />
+
+      <div className="mt-6 rounded-[12px] border border-[#E2E8F0] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.04)]">
+        <UrlInputForm scansUsed={scansUsed} maxScans={maxScans} initialUrl={initialUrl ?? ""} />
+      </div>
     </main>
   );
 }
