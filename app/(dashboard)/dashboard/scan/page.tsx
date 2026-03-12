@@ -79,12 +79,15 @@ export default async function ScanPage({ searchParams }: ScanPageProps) {
         backLabel="New scan"
       />
 
-      <UsageIndicator />
-
       <div className="mt-6">
         <Suspense fallback={<ScanSkeleton />}>
           <ScanResult scanId={scanId as string} />
         </Suspense>
+      </div>
+
+<br></br>
+      <div>
+      <UsageIndicator />
       </div>
     </main>
   );

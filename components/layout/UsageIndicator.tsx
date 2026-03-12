@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BarChart2, Sparkles, Tag } from "lucide-react";
+import { Sparkles, Megaphone, Tag } from "lucide-react";
 import Link from "next/link";
 
 interface UsageData {
@@ -37,7 +37,7 @@ function Meter({
       <div className="flex items-center justify-between mb-1.5">
         <span className="flex items-center gap-1.5 text-xs font-medium text-[#64748B] uppercase tracking-wide">
           <Icon size={12} />
-          {label}
+          &nbsp; {label}: &nbsp;
         </span>
         <span
           className="text-xs font-semibold tabular-nums"
@@ -99,10 +99,10 @@ export function UsageIndicator() {
   return (
     <div className="rounded-[10px] border border-[#E2E8F0] bg-white px-5 py-3.5 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
       <div className="flex items-center gap-5 flex-wrap">
-        <div className="flex flex-1 items-center gap-5 min-w-0">
-          <Meter icon={BarChart2} label="Scans" used={data.scansUsed} max={data.maxScans} />
+        <div className="flex flex-1 items-center gap-5 min-w-0" style={{ fontWeight: "600"}}>
+          <Meter icon={Sparkles} label="Scans" used={data.scansUsed} max={data.maxScans} />
           <div className="w-px h-8 bg-[#E2E8F0] shrink-0" />
-          <Meter icon={Sparkles} label="Ads" used={data.adsUsed} max={data.maxAds} />
+          <Meter icon={Megaphone} label="Ads" used={data.adsUsed} max={data.maxAds} />
           <div className="w-px h-8 bg-[#E2E8F0] shrink-0" />
           <Meter icon={Tag} label="Keywords" used={data.keywordsUsed} max={data.maxKeywords} />
         </div>

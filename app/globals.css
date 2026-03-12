@@ -79,6 +79,23 @@
     color: var(--color-text-primary);
     line-height: 1.25;
   }
+
+  main {
+    margin-left: 20px;
+  }
+
+  button {
+    vertical-align: middle;
+    font-weight: 600;
+    color: var(--color-bg);
+    border: none;
+    border-radius: 10px;
+    padding: 50, 5, 5, 5;
+    height: 30px;
+    background: var(--color-secondary-hover);
+    /* linear-gradient(135deg, var(--color-bg) 0%, var(--color-border) 100%);*/
+
+  }
 }
 
 /* ─── Component Utilities ──────────────────────────────────────────────────── */
@@ -204,5 +221,16 @@
     border-radius: 8px;
     padding: 12px 16px;
     font-size: 14px;
+  }
+
+  .title, .subtitle {
+    color: var(--color-bg);
+  }
+
+  .spot-light {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px 10px 10px 10px;
+        border-radius: 8px;
+
   }
 }

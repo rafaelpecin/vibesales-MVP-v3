@@ -2,92 +2,88 @@
 
 import { useEffect, useState } from "react";
 
-interface SingleGaugeProps {
+interface SingleBarProps {
   score: number;
   label: string;
 }
 
 function scoreColor(score: number): string {
-  if (score <= 40) return "#ef4444";
-  if (score <= 70) return "#eab308";
-  return "#22c55e";
+  if (score <= 40) return "#EF4444";
+  if (score <= 70) return "#F59E0B";
+  return "#10B981";
 }
 
-function SingleGauge({ score, label }: SingleGaugeProps) {
+function scoreLabel(score: number): string {
+  if (score <= 40) return "Poor";
+  if (score <= 70) return "Needs work";
+  if (score <= 90) return "Good";
+  return "Excellent";
+}
+
+function SingleBar({ score, label }: SingleBarProps) {
   const [animated, setAnimated] = useState(0);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setAnimated(score), 50);
+    const timeout = setTimeout(() => setAnimated(score), 80);
     return () => clearTimeout(timeout);
   }, [score]);
 
-  const radius = 70;
-  const stroke = 12;
-  const cx = 90;
-  const cy = 90;
-  const startAngle = 210;
-  const sweepAngle = 300;
-
-  function polarToCartesian(angleDeg: number) {
-    const rad = ((angleDeg - 90) * Math.PI) / 180;
-    return {
-      x: cx + radius * Math.cos(rad),
-      y: cy + radius * Math.sin(rad),
-    };
-  }
-
-  function describeArc(startDeg: number, endDeg: number) {
-    const s = polarToCartesian(startDeg);
-    const e = polarToCartesian(endDeg);
-    const largeArc = endDeg - startDeg > 180 ? 1 : 0;
-    return `M ${s.x} ${s.y} A ${radius} ${radius} 0 ${largeArc} 1 ${e.x} ${e.y}`;
-  }
-
-  const trackEnd = startAngle + sweepAngle;
-  const valueEnd = startAngle + (sweepAngle * animated) / 100;
   const color = scoreColor(score);
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <svg width="180" height="160" viewBox="0 0 180 160" aria-label={`${label}: ${score}`}>
-        <path
-          d={describeArc(startAngle, trackEnd)}
-          fill="none"
-          stroke="#e5e7eb"
-          strokeWidth={stroke}
-          strokeLinecap="round"
-        />
-        <path
-          d={describeArc(startAngle, Math.max(startAngle + 0.5, valueEnd))}
-          fill="none"
-          stroke={color}
-          strokeWidth={stroke}
-          strokeLinecap="round"
-          style={{
-            transition: "d 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
-          }}
-        />
-        <text
-          x={cx}
-          y={cy + 8}
-          textAnchor="middle"
-          fontSize="28"
-          fontWeight="700"
-          fill={color}
-        >
-          {score}
-        </text>
-        <text
-          x={cx}
-          y={cy + 28}
-          textAnchor="middle"
-          fontSize="11"
-          fill="#6b7280"
-        >
-          / 100
-        </text>
-      </svg>
-      <span className="text-sm font-medium text-gray-600 -mt-4">{label}</span>
+    <div style={{ width: "100%" }}>
+      {/* Label row */}
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 8 }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.75)", textTransform: "uppercase", letterSpacing: "0.07em" }}>
+          {label}
+        </span>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
+          <span style={{ fontSize: 22, fontWeight: 700, color: "#fff", fontFamily: "'DM Sans', sans-serif", lineHeight: 1 }}>
+            {score}
+          </span>
+          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>/100</span>
+          <span style={{
+            marginLeft: 4,
+            fontSize: 10,
+            fontWeight: 700,
+            padding: "2px 6px",
+            borderRadius: 4,
+            background: `${color}35`,
+            color,
+          }}>
+            {scoreLabel(score)}
+          </span>
+        </div>
+      </div>
+
+      {/* Track */}
+      <div style={{
+        height: 10,
+        width: "100%",
+        borderRadius: 999,
+        background: "rgba(255,255,255,0.18)",
+        overflow: "hidden",
+        position: "relative",
+      }}>
+        {/* Fill */}
+        <div style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: `${animated}%`,
+          borderRadius: 999,
+          backgroundColor: color,
+          boxShadow: `0 0 8px ${color}90`,
+          transition: "width 0.75s cubic-bezier(0.4, 0, 0.2, 1)",
+        }} />
+      </div>
+
+      {/* Threshold ticks */}
+      <div style={{ position: "relative", height: 6, marginTop: 2 }}>
+        <div style={{ position: "absolute", left: "40%", top: 0, width: 1, height: 6, background: "rgba(255,255,255,0.25)" }} />
+        <div style={{ position: "absolute", left: "70%", top: 0, width: 1, height: 6, background: "rgba(255,255,255,0.25)" }} />
+      </div>
     </div>
   );
 }
@@ -95,13 +91,45 @@ function SingleGauge({ score, label }: SingleGaugeProps) {
 interface SeoScoreGaugeProps {
   currentScore: number;
   projectedScore: number;
+  currentAnalysis?: string;
+  projectedAnalysis?: string;
 }
 
-export function SeoScoreGauge({ currentScore, projectedScore }: SeoScoreGaugeProps) {
+function ScoreRow({ score, label, analysis }: { score: number; label: string; analysis?: string }) {
   return (
-    <div className="flex items-center justify-center gap-10 flex-wrap">
-      <SingleGauge score={currentScore} label="Current Score" />
-      <SingleGauge score={projectedScore} label="Projected Score" />
+    <div style={{ display: "flex", alignItems: "flex-start", gap: 20 }}>
+      <div style={{ flex: "0 0 40%", minWidth: 0 }}>
+        <SingleBar score={score} label={label} />
+      </div>
+      {analysis && (
+        <div style={{
+          flex: 1,
+          minWidth: 0,
+          fontSize: 12,
+          lineHeight: 1.5,
+          color: "rgba(255,255,255,0.75)",
+          paddingTop: 2,
+        }}>
+          {analysis}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function SeoScoreGauge({ currentScore, projectedScore, currentAnalysis, projectedAnalysis }: SeoScoreGaugeProps) {
+  return (
+    <div style={{
+      borderRadius: 10,
+      padding: "16px 20px",
+      display: "flex",
+      flexDirection: "column",
+      gap: 20,
+      background: "linear-gradient(135deg, #021039 0%, #1B4F8A 100%)",
+      boxShadow: "0 2px 12px rgba(26,122,74,0.25)",
+    }}>
+      <ScoreRow score={currentScore} label="Current Score" analysis={currentAnalysis} />
+      <ScoreRow score={projectedScore} label="Projected Score" analysis={projectedAnalysis} />
     </div>
   );
 }

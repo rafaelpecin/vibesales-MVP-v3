@@ -74,7 +74,6 @@ export function UrlInputForm({ scansUsed, maxScans, initialUrl = "" }: UrlInputF
           disabled={loading || limitReached || !url.trim()}
           className="flex items-center gap-2 px-5 py-2.5 rounded-[8px] bg-[#1A7A4A] text-white text-sm font-medium hover:bg-[#155e3a] hover:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-150"
         >
-          <Search className="w-4 h-4" />
           {loading ? "Scanning…" : "Check SEO"}
         </button>
 
