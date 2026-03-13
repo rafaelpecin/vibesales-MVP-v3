@@ -26,7 +26,8 @@ const registerSchema = z
       .string()
       .min(8, "Password must be at least 8 characters")
       .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .regex(/[0-9]/, "Password must contain at least one number"),
+      .regex(/[0-9]/, "Password must contain at least one number")
+      .regex(/[^A-Za-z0-9]/, "Password must contain at least one special character"),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -100,7 +101,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-[#f0fdf8] via-white to-[#eff6ff] min-h-[calc(100vh-56px)] flex items-center justify-center px-4 py-12">
+    <div className="relative overflow-hidden bg-gradient-to-br from-[#f0fdf8] via-white to-[#eff6ff] min-h-[calc(100vh-56px)] flex items-center justify-center px-4 py-12 simple-page">
       {/* Decorative blobs */}
       <div aria-hidden className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-[#2ECC7A]/15 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-[#3B82F6]/15 blur-3xl" />
@@ -216,6 +217,7 @@ export default function RegisterPage() {
                 <p role="alert" className="text-sm font-medium text-[#EF4444]">{serverError}</p>
               )}
 
+              <br></br>
               <button
                 type="submit"
                 disabled={isSubmitting}

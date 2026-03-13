@@ -82,7 +82,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-[#f0fdf8] via-white to-[#eff6ff] min-h-[calc(100vh-56px)] flex items-center justify-center px-4 py-12">
+    <div className="relative overflow-hidden bg-gradient-to-br from-[#f0fdf8] via-white to-[#eff6ff] min-h-[calc(100vh-56px)] flex items-center justify-center px-4 py-12 simple-page">
       {/* Decorative blobs */}
       <div aria-hidden className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-[#2ECC7A]/15 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-[#3B82F6]/15 blur-3xl" />
@@ -179,6 +179,7 @@ export default function LoginPage() {
                 <p role="alert" className="text-sm font-medium text-[#EF4444]">{serverError}</p>
               )}
 
+              <br></br>
               <button
                 type="submit"
                 disabled={isSubmitting}

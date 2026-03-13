@@ -269,4 +269,9 @@
   .hero-url-input:focus {
     outline: none;
   }
+
+  .simple-page {
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    padding: 40px;}
 }
