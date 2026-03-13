@@ -51,6 +51,7 @@
   --color-border: #E2E8F0;
   --color-success: #10B981;
   --color-danger: #EF4444;
+  --color-funny: #e52799;
   --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
 }
 
@@ -230,7 +231,42 @@
   .spot-light {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 10px 10px 10px 10px;
-        border-radius: 8px;
+    border-radius: 8px;
+  }
 
+  .hero-banner {
+    color: var(--color-bg);
+    padding-left: 20px;
+    background: linear-gradient(90deg, var(--color-text-primary) 0%, var(--color-secondary-hover) 5%, var(--color-funny) 50%, var(--color-funny) 100%);
+  }
+
+  .hero-benefits {
+    color: var(--color-bg);
+    background: var(--color-secondary);
+    padding: 20px;
+  }
+
+  .hero-url, .hero-url-input {
+    background-color: var(--color-bg);
+    font-size: 18px;
+    font-weight: 550;
+    text-align: center;
+  }
+
+  .hero-url {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    min-width: 400px;
+    width: 70%;
+  }
+
+  .hero-url-input {
+    width: 100%;
+    border: none;
+  }
+
+  .hero-url-input:focus {
+    outline: none;
   }
 }

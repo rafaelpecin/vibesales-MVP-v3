@@ -6,7 +6,7 @@ import { Printer, ArrowRight } from "lucide-react";
 import { SeoScoreGauge } from "@/components/seo/SeoScoreGauge";
 import { SeoSuggestions } from "@/components/seo/SeoSuggestions";
 import type { SeoResult } from "@/lib/gemini/seoPrompt";
-import { ExternalLink } from "Lucide-react";
+import { ExternalLink } from "lucide-react";
 
 interface ScanResultViewProps {
   scanId: string;

@@ -23,7 +23,7 @@ const platforms = [
 export function AiAdsBenefits() {
   return (
     <section className="bg-gradient-to-br from-[#f0fdf8] to-[#eff6ff] py-20 px-4 ">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl hero-benefits">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-[#1A1F2E]  sm:text-4xl">
             Stop Guessing. Start Converting.

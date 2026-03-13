@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="27.221651mm"
+   height="32.498177mm"
+   viewBox="0 0 27.221651 32.498177"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="logoV0.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="9.1149244"
+     inkscape:cx="93.034233"
+     inkscape:cy="52.551177"
+     inkscape:window-width="1440"
+     inkscape:window-height="722"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="27.221651"
+       height="32.498177"
+       id="page1"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient16-3"
+       inkscape:label="Blue Light">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop9" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.31986234"
+         id="stop10" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0.33441535"
+         id="stop11" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.4322094"
+         id="stop12" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.55262756"
+         id="stop13" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0.69347781"
+         id="stop14" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.69347781"
+         id="stop15" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop16" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient16-3"
+       id="linearGradient18"
+       x1="31.142918"
+       y1="99.166588"
+       x2="46.19746"
+       y2="101.8895"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0650704,0,0,1.0650704,-4.8632975,0.09142092)" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-20.043426,-85.922464)">
+    <rect
+       style="fill:#66166e;fill-opacity:0;stroke:none;stroke-width:0.227302;stroke-linecap:square;stroke-linejoin:round;paint-order:markers stroke fill"
+       id="rect17"
+       width="50.337482"
+       height="59.441936"
+       x="40.386677"
+       y="72.248116" />
+    <rect
+       style="fill:#163f6e;fill-opacity:0;stroke:none;stroke-width:0.227302;stroke-linecap:square;stroke-linejoin:round;paint-order:markers stroke fill"
+       id="rect16"
+       width="50.337482"
+       height="59.441936"
+       x="-9.9511709"
+       y="72.250069" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:33.816px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:url(#linearGradient18);fill-opacity:1;stroke:#000000;stroke-width:0.319521;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       x="26.910343"
+       y="121.21114"
+       id="text10"
+       transform="scale(1.0659633,0.93811861)"
+       inkscape:export-filename="logo-white.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan10"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:url(#linearGradient18);fill-opacity:1;stroke:#000000;stroke-width:0.319521;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+         x="26.910343"
+         y="121.21114">S</tspan></text>
+    <path
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.3;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       d="m 25.241674,104.50052 -5.048335,0.20193 c 1.81124,0.46633 4.699458,3.89434 8.664654,10.28405 3.225545,4.37885 6.260706,4.37885 9.105482,0 l 4.846403,-26.03484 c 0.278698,-1.177335 0.946088,-2.062258 1.472677,-2.879204 -1.623458,0.365133 -3.782373,0.165022 -4.602646,2.273404 l -4.818929,23.21372 c -1.254413,1.48372 -3.686771,1.21734 -4.67194,-0.79912 z"
+       id="path10"
+       sodipodi:nodetypes="cccccccccc" />
+  </g>
+</svg>

@@ -14,7 +14,7 @@ export const metadata = {
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen" style={{ margin: "0px 0px"}}>
       <HeroSection />
       <SeoBenefits />
       <AiAdsBenefits />
